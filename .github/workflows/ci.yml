@@ -17,7 +17,7 @@ jobs:
 
       - name: Run npm ci
         run: |
-          docker compose exec --user root app npm ci
+          docker compose exec app npm ci
       
       - name: Run npm run lint
         run: |
