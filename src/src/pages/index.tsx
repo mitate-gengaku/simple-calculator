@@ -5,12 +5,13 @@ import { useReducer, useState } from "react";
 
 const inter = Inter({ subsets: ["latin"] });
 
-const buttonItems: string[] = ["7", "8" ,"9", "/", "4", "5", "6", "*", "1", "2", "3", "-", "0", "C", "=", "+"]
+export const buttonItems: string[] = ["7", "8" ,"9", "/", "4", "5", "6", "*", "1", "2", "3", "-", "0", "C", "=", "+"]
 
 const Screen = (props: {
   value: string;
 }) => (
   <div
+    id="screen"
     className="w-[344px] text-5xl bg-gray-50 rounded p-2 text-right overflow-x-scroll"
     >
     {props.value}
@@ -141,6 +142,31 @@ const reducer = (state: IState, action: ActionType) => {
   }
 }
 
+const generateClassName = (value: string) => {
+  switch(value) {
+    case "+":
+      return "plus"
+
+    case "-":
+      return "sub"
+
+    case "*":
+      return "mul"
+
+    case "/":
+      return "div"
+    
+    case "C":
+      return "reset"
+    
+    case "=":
+      return "calc"
+
+    default:
+      return value
+  }
+}
+
 export default function Home() {
   const [state, dispatch] = useReducer(reducer, initialState);
 
@@ -184,6 +210,7 @@ export default function Home() {
         {buttonItems.map((buttonItem) => {
           return (
             <Button
+              id={`button_${generateClassName(buttonItem)}`}
               className={cn(
                 "size-20 text-2xl bg-gray-50 rounded hover:bg-gray-200"
               )}
