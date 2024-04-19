@@ -17,13 +17,13 @@ jobs:
 
       - name: Run npm ci
         run: |
-          docker compose exec app npm ci
+          docker compose exec --user root app npm ci
       
       - name: Run npm run lint
         run: |
-          docker compose exec app npm run lint
+          docker compose exec --user root app npm run lint
 
       - name: Run npm run jest
         run: |
-          docker compose exec app npm run test
+          docker compose exec --user root app npm run test
         
